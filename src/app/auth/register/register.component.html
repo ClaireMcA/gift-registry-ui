@@ -1,0 +1,15 @@
+  <form (ngSubmit)='register()'>
+    <mat-form-field appearance="outline">
+      <mat-label>Your name</mat-label>
+      <input [(ngModel)]="credentials.name" name="name" matInput placeholder="Enter your name">
+      <mat-hint>You'll need to remember this if you want to come back</mat-hint>
+    </mat-form-field>      
+
+    <mat-form-field appearance="outline">
+      <mat-label>Passkey</mat-label>
+      <input [(ngModel)]="credentials.password" name="password" matInput placeholder="Enter the passkey">
+      <mat-hint>You'll find the passkey on your invitation</mat-hint>
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+  </form>

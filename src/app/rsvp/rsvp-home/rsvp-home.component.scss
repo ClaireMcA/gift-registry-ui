@@ -1,0 +1,28 @@
+.container {
+    text-align: center;
+    width: 600px;
+}
+
+form {
+    text-align: left;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+button {
+    display: block;
+    margin-top: 1rem;
+}
+
+label {
+    display: block;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 0.3rem;
+}
+
+.dietary-requirements-label {
+    margin-top: 1.5rem;
+}

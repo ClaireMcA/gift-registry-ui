@@ -1,0 +1,55 @@
+.container {
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+} 
+
+.category-container {
+    margin-top: 2rem;
+    width: 48%; 
+}
+
+mat-card {
+    display: flex;
+}
+
+mat-card-subtitle {
+    margin-bottom: 0;
+}
+
+.ml-auto {
+    margin-left: auto; 
+    display: flex;
+    align-items: center;
+}
+
+span {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.double-lined {
+    width: 5rem;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+
+.plus {
+    visibility: hidden;
+    position: absolute;
+    color: #141838;
+}
+
+.animate-plus {
+    animation: move 1s ease-in;
+}
+
+@keyframes move {
+    1% {
+        visibility: visible;
+    }
+  100% { 
+      transform: translate(-10px, -200px);
+  }
+}

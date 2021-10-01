@@ -1,0 +1,48 @@
+<div class="container" *ngIf="{ disableSave: disableSave$ | async,  userIsRsvped: userIsRsvped$ | async } as state">
+    <h1>Wedding RSVP</h1>
+    <ng-container *ngIf="state.userIsRsvped">
+        <h4>
+            We have received your RSVP, thanks for letting us know. If anything changes please contact us directly.
+        </h4>
+    </ng-container>
+    <ng-container *ngIf="!state.userIsRsvped">
+        <h4>We would be asbolutely thrilled to have you at our wedding, please just let us know a few details for the day</h4>
+
+        <form (ngSubmit)='submitSubject$.next()'>
+            <mat-form-field appearance="outline">
+              <mat-label>Please enter full names of all guests</mat-label>
+              <input [(ngModel)]="rsvp.names" name="names" matInput placeholder="Please enter all full names">
+            </mat-form-field>      
+    
+            <label>Can you attend our wedding?</label>
+            <mat-button-toggle-group [(ngModel)]="rsvp.canAttend" name="canAttend" aria-label="Can you attend">
+                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                <mat-button-toggle [value]="false">No</mat-button-toggle>
+            </mat-button-toggle-group>
+    
+            <label class="dietary-requirements-label">Do you have any dietary requirements?</label>
+            <mat-button-toggle-group [(ngModel)]="rsvp.dietaryRequirements" name="dietaryRequirements" aria-label="Dietary Requirements">
+                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+                <mat-button-toggle [value]="false">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        
+            <mat-form-field appearance="outline" *ngIf="rsvp.dietaryRequirements">
+              <mat-label>Dietary Details</mat-label>
+              <textarea [(ngModel)]="rsvp.dietaryDetails" name="dietaryDetails" matInput placeholder="Enter dietary details"></textarea>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Comments</mat-label>
+                <textarea [(ngModel)]="rsvp.comments" name="comments" matInput placeholder="Do you have any comments?"></textarea>
+            </mat-form-field>
+        
+            <ng-container>
+                <button [disabled]="state.disableSave" type="submit" mat-raised-button color="primary">
+                    Submit
+                    <fa-icon *ngIf="state.disableSave" [spin]="true" [icon]="faEnvelope"></fa-icon>
+                </button>
+            </ng-container>
+          </form>
+    </ng-container>
+    
+</div>

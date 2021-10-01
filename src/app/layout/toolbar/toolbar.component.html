@@ -1,0 +1,13 @@
+<mat-toolbar color="accent" *ngIf="{ isAuthenticated: isAuthenticated$ | async } as state">
+    <div>
+        <span class="logo">M & C</span>
+        <button *ngIf="state.isAuthenticated" routerLink="/rsvp-home" mat-button>RSVP</button>
+        <button *ngIf="state.isAuthenticated" routerLink="/registry-items" mat-button>Registry</button>
+        <button *ngIf="state.isAuthenticated" routerLink="/details" mat-button>Details</button>
+    </div>
+    
+    <div>
+        <span>{{ user$ | async }}</span>
+        <button *ngIf="state.isAuthenticated" (click)="logout()" mat-stroked-button>Logout</button>
+    </div>
+  </mat-toolbar>

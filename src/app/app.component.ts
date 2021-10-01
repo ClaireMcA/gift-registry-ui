@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+import { ErrorService } from './error.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gift-registry';
+
+  public error$ = this.errorService.error$;
+
+  constructor(private errorService: ErrorService) {}
 }
