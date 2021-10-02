@@ -4,10 +4,27 @@
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config(
+  $font-family: 'EB Garamond',
+  $display-4:     mat-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3:     mat-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2:     mat-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1:     mat-typography-level(34px, 40px, 400),
+  $headline:      mat-typography-level(28px, 32px, 400),
+  $title:         mat-typography-level(24px, 32px, 500),
+  $subheading-2:  mat-typography-level(20px, 28px, 400),
+  $subheading-1:  mat-typography-level(19px, 24px, 400),
+  $body-2:        mat-typography-level(18px, 24px, 500),
+  $body-1:        mat-typography-level(18px, 20px, 400),
+  $caption:       mat-typography-level(16px, 20px, 400),
+  $button:        mat-typography-level(18px, 18px, 500)
+);
+@include mat-core($custom-typography);
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat-core($custom-typography);
 
 /* For use in src/lib/core/theming/_palette.scss */
 $primary-palette: (
@@ -105,7 +122,7 @@ $gift-registry-theme: mat-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 .container {
   padding-top: 4rem;
   padding-bottom: 4rem;

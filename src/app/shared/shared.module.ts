@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
@@ -23,7 +25,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatButtonModule,
     MatButtonToggleModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule,
+    MatSidenavModule
   ]
 })
 export class SharedModule { }

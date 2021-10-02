@@ -5,6 +5,20 @@
     justify-content: space-between;
 } 
 
+mat-drawer-container {
+    min-height: 100vh;
+}
+
+mat-drawer {
+    padding: 1rem;
+    width: 200px;
+}
+
+mat-drawer span {
+    font-size: 16px;
+    margin-left: .75rem;
+}
+
 .category-container {
     margin-top: 2rem;
     width: 48%; 
@@ -16,6 +30,10 @@ mat-card {
 
 mat-card-subtitle {
     margin-bottom: 0;
+}
+
+p {
+    margin-top: 0.5rem;
 }
 
 .ml-auto {

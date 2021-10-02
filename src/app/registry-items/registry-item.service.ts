@@ -20,6 +20,8 @@ export class RegistryItemService {
 
   public registryItemsSubject = new BehaviorSubject<RegistryItem[]>([]);
 
+  public registryItems$ = this.registryItemsSubject.asObservable();
+
   public registryItemsMap$ = this.registryItemsSubject.pipe(
     map(items => items.reduce((acc, item) => acc[item.category] ? { 
       ...acc, 

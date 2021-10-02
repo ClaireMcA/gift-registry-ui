@@ -1,22 +1,30 @@
-<div *ngIf="{ registryItemsMap: registryItemsMap$ | async, user: user$ | async, xAndY: xAndY$ | async } as state" class="container">
-    <div class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
-        <h1>{{ keyval.key }}</h1>
-        <mat-card *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
-            <mat-card-header>
-                <a *ngIf="item.hyperlink" href="//{{ item.hyperlink }}" target="_blank" mat-card-avatar mat-mini-fab color="primary"><fa-icon [icon]="faLink"></fa-icon></a>
-                <mat-card-title>{{ item.title }}</mat-card-title>
-                <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
-            </mat-card-header>
-
-            <span class="ml-auto">
-                <span *ngIf="item.userRegistered === state.user" class="double-lined">You're getting this item</span>
-
-                <button *ngIf="item.userRegistered !== state.user && item.userRegistered" mat-stroked-button color="primary" disabled>Too slow</button> 
-                <button *ngIf="item.userRegistered === state.user" (click)="deregister(item._id)" mat-stroked-button color="warn"><fa-icon [icon]="faTimes"></fa-icon></button> 
-                <button *ngIf="item.userRegistered !== state.user && !item.userRegistered" (click)="register($event, item._id, state.user)" mat-stroked-button color="primary">I'll get it</button>     
-            </span>
-        </mat-card>
+<mat-drawer-container class="example-container">
+    <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
+        <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
+        <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
+    </mat-drawer>
+  
+    <div *ngIf="{ registryItemsMap: registryItemsMap$ | async, user: user$ | async, xAndY: xAndY$ | async } as state" class="container">
+        <div class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
+            <h1>{{ keyval.key }}</h1>
+            <mat-card *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
+                <mat-card-header>
+                    <a *ngIf="item.hyperlink" href="//{{ item.hyperlink }}" target="_blank" mat-card-avatar mat-mini-fab color="primary"><fa-icon [icon]="faLink"></fa-icon></a>
+                    <mat-card-title>{{ item.title }}</mat-card-title>
+                    <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+                </mat-card-header>
+    
+                <span class="ml-auto">
+                    <span *ngIf="item.userRegistered === state.user" class="double-lined">You're getting this item</span>
+    
+                    <button *ngIf="item.userRegistered !== state.user && item.userRegistered" mat-stroked-button color="primary" disabled>Too slow</button> 
+                    <button *ngIf="item.userRegistered === state.user" (click)="deregister(item._id)" mat-stroked-button color="warn"><fa-icon [icon]="faTimes"></fa-icon></button> 
+                    <button *ngIf="item.userRegistered !== state.user && !item.userRegistered" (click)="register($event, item._id, state.user)" mat-stroked-button color="primary">I'll get it</button>     
+                </span>
+            </mat-card>
+        </div>
+    
+        <fa-icon [ngClass]="{ 'animate-plus': animatePlus$ | async }" [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }" class="plus" [icon]="faCartPlus"></fa-icon>
     </div>
+</mat-drawer-container>
 
-    <fa-icon [ngClass]="{ 'animate-plus': animatePlus$ | async }" [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }" class="plus" [icon]="faCartPlus"></fa-icon>
-</div>
