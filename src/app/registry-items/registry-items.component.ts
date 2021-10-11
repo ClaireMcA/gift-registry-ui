@@ -45,7 +45,7 @@ export class RegistryItemsComponent implements OnInit {
   }
 
   public register($event: any, id: string, user: string | null) {
-    this.xAndY$.next({ x: $event.x, y: $event.y });
+    this.xAndY$.next({ x: $event.x - 200, y: $event.y });
     this.animatePlusSubject$.next(false);
     this.animatePlusSubject$.next(true);
     this.registryItemService.registerForItem(id, user as string);

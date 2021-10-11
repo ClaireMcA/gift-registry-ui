@@ -48,7 +48,6 @@ export class RsvpHomeComponent implements OnInit {
 
   private submit$ = this.submitBegin$.pipe(
     exhaustMap(rsvp => this.rsvpService.submit(rsvp).pipe(
-      delay(5000),
       catchError(e => of({ v: null, e })),
       map(v => ({ v, e: null }))
     )),

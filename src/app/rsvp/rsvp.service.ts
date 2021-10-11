@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Rsvp } from './rsvp';
 
@@ -20,6 +20,8 @@ export class RsvpService {
   }
 
   public submit(rsvp: Rsvp) {
-    return this.http.post(`${environment.apiUrl}/rsvp`, rsvp)
+    return this.http.post<Rsvp>(`${environment.apiUrl}/rsvp`, rsvp).pipe(
+      tap(rsvp => this.rsvps$.next([ ...this.rsvps$.getValue(), rsvp ]))
+    )
   }
 }

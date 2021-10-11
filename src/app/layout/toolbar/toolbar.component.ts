@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -9,8 +10,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class ToolbarComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
-  public isAuthenticated$ = this.authService.isAuthenticated$
-  public user$ = this.authService.user$;
+  public isAuthenticated$ = this.authService.isAuthenticated$.pipe(tap(console.log))
+  public user$ = this.authService.user$.pipe(tap(console.log));
 
   public ngOnInit(): void {}
 

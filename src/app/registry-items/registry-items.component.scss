@@ -28,6 +28,12 @@ mat-card {
     display: flex;
 }
 
+.mat-card-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 mat-card-subtitle {
     margin-bottom: 0;
 }
@@ -43,7 +49,7 @@ p {
 }
 
 span {
-    font-size: 12px;
+    font-size: 15px;
     color: rgba(0, 0, 0, 0.6);
 }
 

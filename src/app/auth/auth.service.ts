@@ -32,7 +32,7 @@ export class AuthService {
 
   public tokenSubject = new BehaviorSubject(localStorage.getItem('gift-registry-jwt'));
   public unparsedToken$ = this.tokenSubject.asObservable();
-  public token$: Observable<UserDetails | null> = this.tokenSubject.pipe(
+  public token$: Observable<UserDetails | null> = this.unparsedToken$.pipe(
     map(token => {
       if (token) {
         let payload = token.split('.')[1];
@@ -49,6 +49,7 @@ export class AuthService {
   )
 
   public user$ = this.token$.pipe(
+    tap(console.log),
     map(token => token !== null ? token.name : null)
   );
 
