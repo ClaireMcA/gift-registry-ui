@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
+    <mat-drawer [opened]="true" #drawer mode="side">
         <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
         <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
     </mat-drawer>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faEnvelope, faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
 import { merge, Observable, of, Subject } from 'rxjs';
-import { catchError, delay, exhaustMap, filter, map, mapTo, share, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, filter, map, mapTo, share, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Rsvp } from '../rsvp';
 import { RsvpService } from '../rsvp.service';
