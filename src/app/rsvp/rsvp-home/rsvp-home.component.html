@@ -2,7 +2,7 @@
     <h1>Wedding RSVP</h1>
     <ng-container *ngIf="state.userIsRsvped">
         <h4>
-            We have received your RSVP, thanks for letting us know. If anything changes please contact us directly.
+            We have received your RSVP, thanks for letting us know. If anything changes please contact us directly at <a href="mailto:clairemattwedding@outlook.com">clairemattwedding@outlook.com</a>.
         </h4>
     </ng-container>
     <ng-container *ngIf="!state.userIsRsvped">
@@ -19,7 +19,7 @@
                        (ngModelChange)="filterFamilies($event)"
                        name="names"
                        [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                   <mat-option *ngFor="let family of filteredFamilies" [value]="family">
                         <fa-icon [icon]="faPeopleArrows" class="mr-2"></fa-icon>
                         {{ family }}
