@@ -49,7 +49,6 @@ export class AuthService {
   )
 
   public user$ = this.token$.pipe(
-    tap(console.log),
     map(token => token !== null ? token.name : null)
   );
 
