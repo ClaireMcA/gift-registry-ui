@@ -21,7 +21,9 @@ export class RsvpService {
 
   public submit(rsvp: Rsvp) {
     return this.http.post<Rsvp>(`${environment.apiUrl}/rsvp`, rsvp).pipe(
-      tap(rsvp => this.rsvps$.next([ ...this.rsvps$.getValue(), rsvp ]))
+      tap(_ => {
+        this.rsvps$.next([ ...this.rsvps$.getValue(), rsvp ])
+      })
     )
   }
 }
