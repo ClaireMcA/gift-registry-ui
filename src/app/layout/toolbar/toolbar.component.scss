@@ -4,10 +4,6 @@ mat-toolbar {
     align-items: center;
 }
 
-.logo {
-    margin-right: 0.5rem;
-}
-
 div {
     display: flex;
     align-items: center;
@@ -18,5 +14,6 @@ button {
 }
 
 img {
-    height: 4.5rem;
+    height: 3.5rem;
+    display: block;
   }

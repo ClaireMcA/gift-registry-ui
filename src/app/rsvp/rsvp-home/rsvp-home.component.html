@@ -19,7 +19,7 @@
                        (ngModelChange)="filterFamilies($event)"
                        name="names"
                        [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let family of filteredFamilies" [value]="family">
                         <fa-icon [icon]="faPeopleArrows" class="mr-2"></fa-icon>
                         {{ family }}
