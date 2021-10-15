@@ -3,7 +3,7 @@
         <a routerLink="/home"><img src="/assets/Logo.svg" alt="Matt and Claire"/></a>
         <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/rsvp-home" mat-button>RSVP</button>
         <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/registry-items" mat-button>Registry</button>
-        <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/details" mat-button>Details</button>
+        <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/details" mat-button>Details & FAQs</button>
     </div>
     
     <div>
@@ -12,3 +12,4 @@
     </div>
   </mat-toolbar>
 
+  
