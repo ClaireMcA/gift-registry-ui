@@ -1,14 +1,14 @@
 <mat-toolbar color="primary" *ngIf="{ isAuthenticated: isAuthenticated$ | async } as state">
     <div>
-        <a routerLink="/home"><img src = "assets/M&C.svg" alt="Matt and Claire"/></a>
-        <button *ngIf="state.isAuthenticated" routerLink="/rsvp-home" mat-button>RSVP</button>
-        <button *ngIf="state.isAuthenticated" routerLink="/registry-items" mat-button>Registry</button>
-        <button *ngIf="state.isAuthenticated" routerLink="/details" mat-button>Details</button>
+        <a routerLink="/home"><img src="/assets/Logo.svg" alt="Matt and Claire"/></a>
+        <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/rsvp-home" mat-button>RSVP</button>
+        <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/registry-items" mat-button>Registry</button>
+        <button fxShow fxHide.lt-md *ngIf="state.isAuthenticated" routerLink="/details" mat-button>Details</button>
     </div>
     
     <div>
         <span>{{ user$ | async }}</span>
-        <button *ngIf="state.isAuthenticated" (click)="logout()" mat-stroked-button>Logout</button>
+        <button color="accent" *ngIf="state.isAuthenticated" (click)="logout()" mat-stroked-button>Logout</button>
     </div>
   </mat-toolbar>
 
