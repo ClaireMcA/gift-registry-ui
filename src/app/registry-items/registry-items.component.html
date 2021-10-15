@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer [opened]="true" #drawer mode="side">
+    <mat-drawer fxHide fxShow.gt-sm [opened]="true" #drawer mode="side">
         <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
         <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
     </mat-drawer>
@@ -26,7 +26,7 @@
             </p>
         </div>
         
-        <div class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
+        <div fxFlex="45" fxFlex.lt-md="100" class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
             <h1>{{ keyval.key }}</h1>
             <mat-card *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
                 <mat-card-header>

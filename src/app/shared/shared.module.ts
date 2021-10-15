@@ -10,6 +10,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatToolbarModule,
     MatCardModule,
     MatAutocompleteModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FlexLayoutModule
   ]
 })
 export class SharedModule { }
