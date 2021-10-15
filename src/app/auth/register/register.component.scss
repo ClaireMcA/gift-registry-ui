@@ -1,5 +1,6 @@
 form {
     width: 600px;
+    max-width: 90%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -12,4 +13,8 @@ mat-form-field {
 
 button {
     margin-top: 2rem;
+}
+
+p a {
+    color: #212852;
 }

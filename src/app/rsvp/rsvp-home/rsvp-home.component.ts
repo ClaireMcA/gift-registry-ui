@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEnvelope, faPeopleArrows } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { catchError, exhaustMap, filter, map, mapTo, share, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -13,7 +13,7 @@ import { RsvpService } from '../rsvp.service';
 })
 export class RsvpHomeComponent implements OnInit {
   public readonly faEnvelope = faEnvelope;
-  public readonly faPeopleArrows = faPeopleArrows;
+  public readonly faUserSecret = faUserSecret;
   private families = [
     "Aimee and Bob",
     "Alan and Karyn",
@@ -92,9 +92,9 @@ export class RsvpHomeComponent implements OnInit {
   ]
   private onDestroy$ = new Subject();
 
-  public userIsRsvped$ = this.rsvpService.rsvpedUsers$.pipe(
+  public usersRsvp$ = this.rsvpService.rsvpedUsers$.pipe(
     withLatestFrom(this.authService.user$),
-    map(([rsvpedUsers, userName]) => rsvpedUsers.includes(userName as string))
+    map(([rsvpedUsers, userName]) => rsvpedUsers.find(user => user.userName === userName))
   );
 
   public submitSubject$ = new Subject();

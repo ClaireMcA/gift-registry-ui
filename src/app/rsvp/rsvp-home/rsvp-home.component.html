@@ -1,11 +1,12 @@
-<div class="container" *ngIf="{ disableSave: disableSave$ | async,  userIsRsvped: userIsRsvped$ | async } as state">
+<div class="container" *ngIf="{ disableSave: disableSave$ | async,  usersRsvp: usersRsvp$ | async } as state">
     <h1>Wedding RSVP</h1>
-    <ng-container *ngIf="state.userIsRsvped">
+    <ng-container *ngIf="state.usersRsvp">
         <h4>
+            Thanks {{ state.usersRsvp?.names}}!
             We have received your RSVP, thanks for letting us know. If anything changes please contact us directly at <a href="mailto:clairemattwedding@outlook.com">clairemattwedding@outlook.com</a>.
         </h4>
     </ng-container>
-    <ng-container *ngIf="!state.userIsRsvped">
+    <ng-container *ngIf="!state.usersRsvp">
         <h4>We would be asbolutely thrilled to have you at our wedding, please just let us know a few details for the day</h4>
 
         <form (ngSubmit)='submitSubject$.next()'>
@@ -21,7 +22,7 @@
                        [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let family of filteredFamilies" [value]="family">
-                        <fa-icon [icon]="faPeopleArrows" class="mr-2"></fa-icon>
+                        <fa-icon [icon]="faUserSecret" class="mr-2"></fa-icon>
                         {{ family }}
                   </mat-option>
                 </mat-autocomplete>

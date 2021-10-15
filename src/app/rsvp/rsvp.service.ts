@@ -11,10 +11,8 @@ import { Rsvp } from './rsvp';
 export class RsvpService {
   private rsvps$ = new BehaviorSubject<Rsvp[]>([]);
 
-  public rsvpedUsers$ = this.rsvps$.pipe(
-    map(rsvps => rsvps.map(rsvp => rsvp.userName))
-  );
-
+  public rsvpedUsers$ = this.rsvps$.asObservable();
+  
   constructor(private http: HttpClient) {
     this.http.get<Rsvp[]>(`${environment.apiUrl}/rsvps`).subscribe(rsvps => this.rsvps$.next(rsvps))
   }
