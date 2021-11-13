@@ -85,7 +85,7 @@ export class RsvpHomeComponent implements OnInit {
     "Ryan and Lauren",
     "Sarah Clements",
     "Shenae Smith",
-    "Sheri Thomas",
+    "Sheri and Pinso",
     "Somya Singh",
     "Steve, Amber and Riley",
     "Victoria Garrard",
