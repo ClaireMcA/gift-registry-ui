@@ -8,7 +8,7 @@ import { RegistryItemsComponent } from './registry-items/registry-items.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthModule } from './auth/auth.module';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from './layout/layout.module';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';

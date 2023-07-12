@@ -11,8 +11,8 @@ import { RsvpHomeComponent } from './rsvp/rsvp-home/rsvp-home.component';
 const routes: Routes = [
   { path: '', component: RegisterComponent, pathMatch: 'full', canActivate: [SkipLoginGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  // { path: 'rsvp-home', component: RsvpHomeComponent, canActivate: [AuthGuard] },
-  // { path: 'details', component: DetailsComponent, canActivate: [AuthGuard] },
+  { path: 'rsvp-home', component: RsvpHomeComponent, canActivate: [AuthGuard] },
+  { path: 'details', component: DetailsComponent, canActivate: [AuthGuard] },
   { path: 'registry-items', component: RegistryItemsComponent, canActivate: [AuthGuard] }
 ];
 

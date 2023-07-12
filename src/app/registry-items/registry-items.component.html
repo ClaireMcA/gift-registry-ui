@@ -32,7 +32,7 @@
         
         <div fxFlex="45" fxFlex.lt-md="100" class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
             <h1>{{ keyval.key }}</h1>
-            <mat-card *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
+            <mat-card appearance="outlined" *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
                 <mat-card-header>
                     <a *ngIf="item.hyperlink" href="//{{ item.hyperlink }}" target="_blank" mat-card-avatar mat-mini-fab color="primary"><fa-icon [icon]="faLink"></fa-icon></a>
                     <mat-card-title>{{ item.title }}</mat-card-title>
