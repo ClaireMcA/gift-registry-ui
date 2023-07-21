@@ -10,10 +10,32 @@ div {
 }
 
 button {
+    --mdc-outlined-button-outline-color: var(--accent-color);
+}
+
+button:not(:first-child) {
     margin-left: 1rem;
 }
 
 img {
     height: 3.5rem;
     display: block;
+  }
+
+  .md-hidden {
+    display: flex;
+  }
+
+  .md-shown, .md-shown-flex {
+    display: none;
+  }
+
+  @media(min-width: 768px) {
+    .md-hidden {
+        display: none;
+    }
+
+    .md-shown {
+        display: block;
+    }
   }

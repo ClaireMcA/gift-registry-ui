@@ -1,13 +1,23 @@
 div {
-    text-align:center; 
-    margin-top: 6rem;
+    display: flex;
+    gap: 1rem;
+    margin: 2rem auto 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+@media(min-width: 968px) {
+    div {
+        flex-direction: row;
+    }
 }
 
 button {
+    height: auto !important;
     width: 250px;
-    margin-top: 2.5rem;
     font-size: 25px;
-    padding: 1rem 3rem;
+    padding: 2rem 3rem;
 }
 
 h4 {

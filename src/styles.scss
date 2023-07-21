@@ -109,7 +109,7 @@ $gift-registry-theme: mat.define-light-theme((
     accent: $gift-registry-accent,
     warn: $gift-registry-warn,
   ),
-  typograph: $custom-typography,
+  typography: $custom-typography,
   density: 0
 ));
 
@@ -118,8 +118,13 @@ $gift-registry-theme: mat.define-light-theme((
 // that you are using.
 @include mat.core-theme($gift-registry-theme);
 @include mat.all-component-themes($gift-registry-theme);
+@include mat.all-component-typographies($gift-registry-theme);
 
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --toolbar-default: whitesmoke;
+  --accent-color: mat.get-color-from-palette($accent-palette, "500");
+}
 
 html, body { height: 100%; }
 body { margin: 0; }

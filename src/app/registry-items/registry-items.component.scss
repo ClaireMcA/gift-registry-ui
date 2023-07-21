@@ -10,6 +10,7 @@ mat-drawer-container {
 }
 
 mat-drawer {
+    display: none;
     padding: 1rem;
     width: 200px;
 }
@@ -77,4 +78,10 @@ span {
   100% { 
       transform: translate(-10px, -200px);
   }
+}
+
+@media(min-width: 768px) {
+    mat-drawer {
+        display: block;
+    }
 }
