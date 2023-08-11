@@ -30,7 +30,7 @@
             </p>
         </div>
         
-        <div fxFlex="45" fxFlex.lt-md="100" class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
+        <div class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
             <h1>{{ keyval.key }}</h1>
             <mat-card appearance="outlined" *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
                 <mat-card-header>
@@ -39,13 +39,15 @@
                     <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
                 </mat-card-header>
     
-                <span class="ml-auto">
-                    <span *ngIf="item.userRegistered === state.user" class="double-lined">You're getting this item</span>
-    
-                    <button *ngIf="item.userRegistered !== state.user && item.userRegistered" mat-stroked-button color="primary" disabled>Too slow</button> 
-                    <button *ngIf="item.userRegistered === state.user" (click)="deregister(item._id)" mat-stroked-button color="warn"><fa-icon [icon]="faTimes"></fa-icon></button> 
-                    <button *ngIf="item.userRegistered !== state.user && !item.userRegistered" (click)="register($event, item._id, state.user)" mat-stroked-button color="primary">I'll get it</button>     
-                </span>
+                <!-- <span class="ml-auto"> -->
+                    <mat-card-actions>
+        
+                        <button *ngIf="item.userRegistered !== state.user && item.userRegistered" mat-stroked-button color="primary" disabled>Too slow</button> 
+                        <button *ngIf="item.userRegistered === state.user" (click)="deregister(item._id)" mat-stroked-button color="warn"><fa-icon [icon]="faTimes"></fa-icon></button> 
+                        <button *ngIf="item.userRegistered !== state.user && !item.userRegistered" (click)="register($event, item._id, state.user)" mat-stroked-button color="primary">I'll get it</button>     
+                        <span *ngIf="item.userRegistered === state.user" class="double-lined">You're getting this item</span>
+                    </mat-card-actions>
+                <!-- </span> -->
             </mat-card>
         </div>
     
