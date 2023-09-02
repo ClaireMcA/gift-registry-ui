@@ -8,7 +8,7 @@
 @include mat.core();
 
 $custom-typography: mat.define-typography-config(
-  $font-family: 'EB Garamond',
+  $font-family: 'Niramit',
   $headline-1:     mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
   $headline-2:    mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
   $headline-3:     mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
@@ -25,16 +25,16 @@ $custom-typography: mat.define-typography-config(
 
 /* For use in src/lib/core/theming/_palette.scss */
 $primary-palette: (
-    50 : #e4e5ea,
-    100 : #bcbfcb,
-    200 : #9094a9,
-    300 : #646986,
-    400 : #42486c,
-    500 : #212852,
-    600 : #1d244b,
-    700 : #181e41,
-    800 : #141838,
-    900 : #0b0f28,
+    50: #ffebf0, 
+    100: #ffccd6,
+    200: #f998a0,
+    300: #f46d7a,
+    400: #ff4558,
+    500: #e70036,
+    600: #f9183c,
+    700: #e70036,
+    800: #da002e,
+    900: #cd0021,
     A100 : #6674ff,
     A200 : #3346ff,
     A400 : #0017ff,
@@ -58,20 +58,20 @@ $primary-palette: (
 );
 
 $accent-palette: (
-    50 : #f7f4f4,
-    100 : #ece4e4,
-    200 : #dfd2d2,
-    300 : #d2c0bf,
-    400 : #c9b3b2,
-    500 : #bfa5a4,
-    600 : #b99d9c,
-    700 : #b19392,
-    800 : #a98a89,
-    900 : #9b7978,
-    A100 : #ffffff,
-    A200 : #ffeded,
-    A400 : #ffbbb9,
-    A700 : #ffa2a0,
+    50 : #476682,
+    100 : #476682,
+    200 : #476682,
+    300 : #476682,
+    400 : #476682,
+    500 : #476682,
+    600 : #476682,
+    700 : #476682,
+    800 : #476682,
+    900 : #476682,
+    A100 : #476682,
+    A200 : #476682,
+    A400 : #476682,
+    A700 : #476682,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -121,9 +121,13 @@ $gift-registry-theme: mat.define-light-theme((
 @include mat.all-component-typographies($gift-registry-theme);
 
 /* You can add global styles to this file, and also import other style files */
+// This doesn't seem to work for some reason, mat funcs don't get evaluated
+// Would like to just use custom properties for styling
 :root {
   --toolbar-default: whitesmoke;
-  --accent-color: mat.get-color-from-palette($accent-palette, "500");
+  --accent-color: mat.get-color-from-palette($accent-palette, 500);
+  --toolbar-primary: mat.get-color-from-palette($primary-palette, 700);
+  --text-primary: mat.get-color-from-palette($primary-palette, 900)
 }
 
 html, body { height: 100%; }
@@ -138,4 +142,13 @@ body { margin: 0; }
 
 .mt-1 {
   margin-top: 0.5rem;
+}
+
+.toolbar-primary-700 {
+  background-color: mat.get-color-from-palette($primary-palette, 700);
+  color: whitesmoke;
+}
+
+.text-primary-900 {
+  color: mat.get-color-from-palette($primary-palette, 900);
 }

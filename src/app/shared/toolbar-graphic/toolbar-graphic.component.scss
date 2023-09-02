@@ -1,0 +1,20 @@
+mat-toolbar {
+    background-image: url('/assets/Jaedin & Emily header 1920.jpg');
+    height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+@media (min-width: 1024px) {
+    mat-toolbar {
+        height: 150px;
+    }
+}
+
+@media (min-width: 2000px) {
+    mat-toolbar {
+        height: 200px;
+    }
+}

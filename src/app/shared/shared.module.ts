@@ -10,11 +10,21 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToolbarGraphicComponent } from './toolbar-graphic/toolbar-graphic.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ToolbarGraphicComponent,
+    ToolbarComponent
+  ],
   imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    CommonModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
@@ -27,7 +37,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatToolbarModule,
     MatCardModule,
     MatAutocompleteModule,
-    MatSidenavModule
+    MatSidenavModule,
+    ToolbarGraphicComponent,
+    ToolbarComponent
   ]
 })
 export class SharedModule { }

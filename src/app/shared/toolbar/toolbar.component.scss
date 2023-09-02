@@ -1,4 +1,10 @@
-mat-toolbar {
+mat-toolbar:first-child {
+    background-image: url('/assets/Jaedin & Emily header 1920.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+mat-toolbar:nth-child(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,12 +15,16 @@ div {
     align-items: center;
 }
 
-button {
-    --mdc-outlined-button-outline-color: var(--accent-color);
+a {
+    color: var(--accent-color);
 }
 
 button:not(:first-child) {
     margin-left: 1rem;
+}
+
+span {
+  color: #476682;
 }
 
 img {

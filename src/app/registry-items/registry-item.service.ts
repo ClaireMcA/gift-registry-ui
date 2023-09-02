@@ -14,7 +14,7 @@ interface RegistryItemMap {
   providedIn: 'root'
 })
 export class RegistryItemService {
-  private onDestroy$ = new Subject();
+  private onDestroy$ = new Subject<void>();
   private requestRegisterForItem$ = new Subject<{ id: string, user: string }>();
   private requestDeregisterForItem$ = new Subject<string>();
 
