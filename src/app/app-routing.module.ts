@@ -6,6 +6,8 @@ import { SkipLoginGuard } from './auth/skip-login.guard';
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './layout/details/details.component';
 import { RegistryItemsComponent } from './registry-items/registry-items.component';
+import { RegistryAdminComponent } from './registry-admin/registry-admin.component';
+
 import { RsvpHomeComponent } from './rsvp/rsvp-home/rsvp-home.component';
 
 const routes: Routes = [
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'rsvp-home', component: RsvpHomeComponent, canActivate: [AuthGuard] },
   { path: 'details', component: DetailsComponent, canActivate: [AuthGuard] },
-  { path: 'registry-items', component: RegistryItemsComponent, canActivate: [AuthGuard] }
+  { path: 'registry-items', component: RegistryItemsComponent, canActivate: [AuthGuard] },
+  { path: 'registry-admin', component: RegistryAdminComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({

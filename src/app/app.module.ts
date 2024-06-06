@@ -15,11 +15,13 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './error.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RsvpModule } from './rsvp/rsvp.module';
+import { RegistryAdminComponent } from './registry-admin/registry-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistryItemsComponent,
+    RegistryAdminComponent,
     HomeComponent
   ],
   imports: [

@@ -1,0 +1,54 @@
+<app-toolbar></app-toolbar>
+<mat-drawer-container class="example-container">
+    <mat-drawer [opened]="true" #drawer mode="side">
+        <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
+        <p *ngFor="let item of myRegistryAdmin$ | async">{{ item.title }}</p>
+    </mat-drawer>
+  
+    <div *ngIf="{ registryAdminMap: registryAdminMap$ | async, user: user$ | async, xAndY: xAndY$ | async } as state" class="container">
+        <div>
+            <h2>REGISTRY</h2>
+
+            <p>
+                Thank you for celebrating our special day! It means the world to us that you can share this moment, this gift is priceless. However, we also know that some people enjoy giving gifts and would love to contribute to our new home.
+            </p>
+        
+            <p>
+                We have compiled a list of items if you would like some guidance in what we would find most useful. Some of these items also include a description or link for particular styles we like, but don't hold back to go rogue if you're feeling inspired! We can't wait to incorporate splashes of the personalities of our favourite people in our home.
+            </p>
+        
+            <p>
+                If you would prefer to contribute money, there will also be a letter box for cards and cash on the day. Your contributions will go towards 'big ticket items' such as furniture and white goods.
+            </p>
+
+            <p>
+                Thanks again! <br>
+                Love Jaedin & Emily
+            </p>
+        </div>
+        
+        <div class="category-container" *ngFor="let keyval of state.registryAdminMap | keyvalue">
+            <h1>{{ keyval.key }}</h1>
+            <mat-card appearance="outlined" *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
+                <mat-card-header>
+                    <a *ngIf="item.hyperlink" href="{{ item.hyperlink }}" target="_blank" mat-card-avatar mat-mini-fab color="primary"><fa-icon [icon]="faLink"></fa-icon></a>
+                    <mat-card-title>{{ item.title }}</mat-card-title>
+                    <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+                </mat-card-header>
+    
+                <!-- <span class="ml-auto"> -->
+                    <mat-card-actions>
+        
+                        <button *ngIf="item.userRegistered !== state.user && item.userRegistered" class="too-slow" mat-stroked-button color="primary" disabled>Too slow</button> 
+                        <button *ngIf="item.userRegistered === state.user" (click)="deregister(item._id)" mat-stroked-button color="warn"><fa-icon [icon]="faTimes"></fa-icon></button> 
+                        <button *ngIf="item.userRegistered !== state.user && !item.userRegistered" (click)="register($event, item._id, state.user)" class="get-it" mat-stroked-button color="primary">I'll get it</button>     
+                        <span *ngIf="item.userRegistered === state.user" class="double-lined">You're getting this item</span>
+                    </mat-card-actions>
+                <!-- </span> -->
+            </mat-card>
+        </div>
+    
+        <fa-icon [ngClass]="{ 'animate-plus': animatePlus$ | async }" [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }" class="plus" [icon]="faCartPlus"></fa-icon>
+    </div>
+</mat-drawer-container>
+

@@ -1,0 +1,114 @@
+mat-card-actions {
+    padding: 24px 16px 16px 16px;
+}
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+} 
+
+mat-drawer-container {
+    min-height: 100vh;
+}
+
+mat-drawer {
+    display: none;
+    padding: 1rem;
+    width: 200px;
+}
+
+mat-drawer span {
+    font-size: 16px;
+    margin-left: .75rem;
+}
+
+.category-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+mat-card {
+    display: flex;
+}
+
+.mat-mdc-card-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+mat-card-subtitle {
+    margin-bottom: 0;
+}
+
+p {
+    margin-top: 0.5rem;
+}
+
+
+span {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.double-lined {
+    width: 5rem;
+    text-align: center;
+    margin-left: 1rem;
+}
+
+.plus {
+    visibility: hidden;
+    position: absolute;
+    color: #141838;
+}
+
+.animate-plus {
+    animation: move 1s ease-in;
+}
+
+@keyframes move {
+    1% {
+        visibility: visible;
+    }
+  100% { 
+      transform: translate(-10px, -200px);
+  }
+}
+
+@media(min-width: 1024px) {
+    mat-card {
+        flex-direction: row;
+    }
+
+    mat-card-header {
+        padding-bottom: 16px;
+    }
+
+    mat-card-actions {
+        margin-left: auto; 
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media(min-width: 1440px) {
+    mat-drawer {
+        display: block;
+    }
+
+    .category-container {
+        width: 45%;
+    }
+
+    button.get-it,button.too-slow {
+        width: 100px;
+    }
+
+}
