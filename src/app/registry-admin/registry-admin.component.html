@@ -1,0 +1,129 @@
+<app-toolbar></app-toolbar>
+<!-- <app-toolbar-graphic></app-toolbar-graphic> -->
+<mat-drawer-container class="example-container">
+  <!-- <mat-drawer [opened]="true" #drawer mode="side">
+    <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
+    <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
+  </mat-drawer> -->
+
+  <div
+    *ngIf="{
+      registryAdminMap: registryAdminMap$ | async,
+      user: user$ | async,
+      xAndY: xAndY$ | async
+    } as state"
+    class="container"
+  >
+    <div class="intro">
+      <h2>MANAGE REGISTRY</h2>
+      <p>Add a new registry item:</p>
+
+      <!-- <form (ngSubmit)=''> -->
+
+      <!-- </form> -->
+    </div>
+
+    <div>
+    <div
+      class="category-container"
+      *ngFor="let keyval of state.registryAdminMap | keyvalue"
+    >
+      <h1>{{ keyval.key }}</h1>
+      <mat-card
+        appearance="outlined"
+        *ngFor="let item of keyval.value; let first = first"
+      >
+      <mat-card-header>
+        <!-- <ng-template *ngIf="item.hyperlink"> -->
+          <a
+            *ngIf="item.hyperlink"
+            href="{{ item.hyperlink }}"
+            target="_blank"
+            class="title-link"
+          >
+            <mat-card-title class="mat-primary">{{ item.title }}</mat-card-title>
+          </a>
+        <!-- </ng-template> -->
+        <!-- <ng-template #noLink> -->
+          <mat-card-title 
+            *ngIf="!item.hyperlink"
+            class="mat-primary"
+          >
+          {{ item.title }}
+        </mat-card-title>
+        <!-- </ng-template> -->
+
+        <!-- <ng-template #elseBlock><mat-card-title class="mat-primary">False Heading</mat-card-title></ng-template> -->
+        <!-- <button
+          *ngIf="item.hyperlink"
+          (click)=item.hyperlink
+          mat-raised-button
+          mat-card-avatar
+          color="primary"
+        >
+        <fa-icon [icon]="faLink"></fa-icon>
+        </button> -->
+        <a
+          *ngIf="item.hyperlink"
+          href="{{ item.hyperlink }}"
+          target="_blank"
+          mat-mini-fab
+          mat-card-avatar
+          color="primary"
+          ><fa-icon [icon]="faLink"></fa-icon
+        ></a>
+        
+      </mat-card-header>
+      <mat-card-content>
+          <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+      </mat-card-content>
+
+      <!-- <span class="ml-auto"> -->
+      <mat-card-actions>
+        <button
+          *ngIf="item.userRegistered !== state.user && item.userRegistered && item.userRegistered !== 'unlimited'"
+          class="too-slow"
+          mat-raised-button
+          color="primary"
+          disabled
+        >
+          Too slow
+        </button>
+
+        <span *ngIf="item.userRegistered === state.user && item.userRegistered !== 'unlimited'" class="double-lined">
+          You're getting this item
+        </span>
+        <button
+          *ngIf="item.userRegistered === state.user"
+          (click)="deregister(item._id)"
+          class="cancel-it"
+          mat-raised-button
+          color="warn"
+        >
+          Cancel
+          <!-- <fa-icon [icon]="faTimes"></fa-icon> -->
+        </button>
+
+        <button
+          *ngIf="item.userRegistered !== state.user && !item.userRegistered && item.userRegistered !== 'unlimited'"
+          (click)="register($event, item._id, state.user)"
+          class="get-it"
+          mat-raised-button
+          color="primary"
+        >
+          I'll get it
+        </button>
+      </mat-card-actions>
+      <!-- </span> -->
+    </mat-card>
+  </div>
+
+  <fa-icon
+    [ngClass]="{ 'animate-plus': animatePlus$ | async }"
+    [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }"
+    class="plus"
+    [icon]="faCartPlus"
+  ></fa-icon>
+</div>
+</div>
+</mat-drawer-container>

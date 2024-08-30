@@ -1,10 +1,12 @@
 <app-toolbar></app-toolbar>
+<!-- <app-toolbar-graphic></app-toolbar-graphic> -->
+
 <div class="container" *ngIf="{ disableSave: disableSave$ | async,  usersRsvp: usersRsvp$ | async } as state">
     <h1>Wedding RSVP</h1>
     <ng-container *ngIf="state.usersRsvp">
         <h4>
             Thanks {{ state.usersRsvp.names }}!
-            We have received your RSVP, thanks for letting us know. If anything changes please contact us directly at <a class="text-primary-900" href="mailto:jaedinandemily@garrard.net.au">jaedinandemily@garrard.net.au</a>.
+            We have received your RSVP, thanks for letting us know. If anything changes please contact us directly at <a class="text-primary-900" href="mailto:mikaylaanconnor@gmail.com">mikaylaanconnor@gmail.com</a>.
         </h4>
     </ng-container>
     <ng-container *ngIf="!state.usersRsvp">
@@ -23,7 +25,6 @@
                        [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let family of filteredFamilies" [value]="family">
-                        <fa-icon [icon]="faUserSecret" class="mr-2"></fa-icon>
                         {{ family }}
                   </mat-option>
                 </mat-autocomplete>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/auth/auth.service';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,6 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  public faLink = faLink;
   public readonly faHome = faHome;
   constructor(private authService: AuthService) {}
 

@@ -1,16 +1,63 @@
-<ng-container *ngIf="{ isAuthenticated: isAuthenticated$ | async } as state">
-    <mat-toolbar></mat-toolbar>
-    <mat-toolbar>
-        <div>
-            <button color="accent" routerLink="/home" mat-button>Home</button>
-            <button color="accent" class="md-shown" *ngIf="state.isAuthenticated" routerLink="/rsvp-home" mat-button>RSVP</button>
-            <button color="accent" class="md-shown" *ngIf="state.isAuthenticated" routerLink="/registry-items" mat-button>Registry</button>
-            <button color="accent" class="md-shown" *ngIf="state.isAuthenticated" routerLink="/details" mat-button>Details</button>
-        </div>
+<mat-toolbar
+  color="primary"
+  *ngIf="{ isAuthenticated: isAuthenticated$ | async } as state"
+>
+  <div>
+    <a 
+      routerLink="/home"
+    >
+      <img 
+        class="menu-img"
+        src="/assets/Menu.svg" 
+        alt="Menu Button"
+      />
+      <img 
+        class="logo-img"
+        src="/assets/Logo.svg" 
+        alt="Mikayla and Connor"
+      />
+  </a>
+    <!-- <button color="accent" routerLink="/home" mat-button>Home</button> -->
+    <button
+    color="accent"
+    class="md-shown"
+    *ngIf="state.isAuthenticated"
+    routerLink="/details"
+    mat-button
+  >
+    Details
+  </button>
+  <button
+      color="accent"
+      class="md-shown"
+      *ngIf="state.isAuthenticated"
+      routerLink="/registry-items"
+      mat-button
+    >
+      Registry
+    </button>
+    <button
+      color="accent"
+      class="md-shown"
+      *ngIf="state.isAuthenticated"
+      routerLink="/rsvp-home"
+      mat-button
+    >
+      RSVP
+    </button>
+  </div>
 
-        <div>
-            <span class="md-shown">{{ user$ | async }}</span>
-            <button color="accent" *ngIf="state.isAuthenticated" (click)="logout()" mat-stroked-button>Logout</button>
-        </div>
-    </mat-toolbar>
-</ng-container>
+  <div>
+    <span class="md-shown" color="accent">{{ user$ | async | titlecase }}</span>
+    <button
+      color="accent"
+      *ngIf="state.isAuthenticated"
+      (click)="logout()"
+      mat-stroked-button
+    >
+      Logout
+    </button>
+  </div>
+</mat-toolbar>
+
+

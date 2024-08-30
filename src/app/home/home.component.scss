@@ -1,4 +1,15 @@
-div {
+// .background {
+//     background-image: url(../../assets/floral-bg.jpeg);
+// }
+
+// .main-container {
+//     min-width: 900px;
+//     background-color: white;
+//     min-height: 100vh;
+// }
+
+.inner-container {
+
     display: flex;
     gap: 1rem;
     margin: 4rem auto 0;
@@ -7,11 +18,11 @@ div {
     flex-direction: column;
 }
 
-@media(min-width: 968px) {
-    div {
-        flex-direction: row;
-    }
-}
+// @media(min-width: 968px) {
+//     div {
+//         flex-direction: row;
+//     }
+// }
 
 button {
     height: auto !important;

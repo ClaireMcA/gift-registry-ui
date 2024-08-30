@@ -1,0 +1,169 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$custom-typography: mat.define-typography-config(
+  $font-family: 'Alegreya SC',
+  $headline-1:     mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2:    mat.define-typography-level(56px, 56px, 300, $letter-spacing: -0.02em),
+  $headline-3:     mat.define-typography-level(45px, 48px, 300, $letter-spacing: -0.005em),
+  $headline-4:     mat.define-typography-level(34px, 40px, 300),
+  $headline-5:      mat.define-typography-level(28px, 32px, 400),     /* h1 */
+  $headline-6:         mat.define-typography-level(24px, 32px, 400),  /* h2 */
+  $subtitle-1:  mat.define-typography-level(20px, 28px, 300, 'Alegreya'),         /* h3 */
+  $subtitle-2:  mat.define-typography-level(19px, 24px, 300, 'Alegreya'),         /* h4 */
+  $body-1:        mat.define-typography-level(18px, 24px, 400, 'Alegreya'),       
+  $body-2:        mat.define-typography-level(18px, 20px, 300, 'Alegreya'),
+  $caption:       mat.define-typography-level(16px, 20px, 300, 'Alegreya'),
+  $button:        mat.define-typography-level(18px, 18px, 400, 'Alegreya')
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+// $primary-palette: (
+//     50 : #e4e5ea,
+//     100 : #bcbfcb,
+//     200 : #9094a9,
+//     300 : #646986,
+//     400 : #42486c,
+//     500 : #212852,
+//     600 : #1d244b,
+//     700 : #181e41,
+//     800 : #141838,
+//     900 : #0b0f28,
+//     A100 : #6674ff,
+//     A200 : #3346ff,
+//     A400 : #0017ff,
+//     A700 : #0015e6,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #ffffff,
+//         400 : #ffffff,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #ffffff,
+//         A200 : #ffffff,
+//         A400 : #ffffff,
+//         A700 : #ffffff,
+//     )
+// );
+// $accent-palette: (
+//     50 : #f7f4f4,
+//     100 : #ece4e4,
+//     200 : #dfd2d2,
+//     300 : #d2c0bf,
+//     400 : #c9b3b2,
+//     500 : #bfa5a4,
+//     600 : #b99d9c,
+//     700 : #b19392,
+//     800 : #a98a89,
+//     900 : #9b7978,
+//     A100 : #ffffff,
+//     A200 : #ffeded,
+//     A400 : #ffbbb9,
+//     A700 : #ffa2a0,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #000000,
+//         400 : #000000,
+//         500 : #000000,
+//         600 : #000000,
+//         700 : #000000,
+//         800 : #000000,
+//         900 : #000000,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+$primary-palette: (
+    100 : #d4e0f2,
+    500 : #8298b5,
+    700 : #000000,
+);
+$accent-palette: (
+    100 : #edd0d6,
+    500 : #c38184,
+    700 : #ffffff,
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$gift-registry-primary: mat.define-palette($primary-palette);
+// $gift-registry-primary: mat.define-palette(#d4e0f2);
+$gift-registry-accent: mat.define-palette($accent-palette);
+// $gift-registry-accent: mat.define-palette(#edd0d6);
+
+// The warn palette is optional (defaults to red).
+$gift-registry-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$gift-registry-theme: mat.define-light-theme((
+  color: (
+    primary: $gift-registry-primary,
+    accent: $gift-registry-accent,
+    warn: $gift-registry-warn,
+  ),
+  typography: $custom-typography,
+  density: 0
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.core-theme($gift-registry-theme);
+@include mat.all-component-themes($gift-registry-theme);
+@include mat.all-component-typographies($gift-registry-theme);
+
+/* You can add global styles to this file, and also import other style files */
+// This doesn't seem to work for some reason, mat funcs don't get evaluated
+// Would like to just use custom properties for styling
+:root {
+  --toolbar-default: whitesmoke;
+  --accent-color: #e3b8d2;
+  // --accent-color: #9b7978;
+  --toolbar-primary: #b8c3e3;
+  --text-primary: mat.get-color-from-palette($primary-palette, 500)
+}
+
+html, body { height: 100%; }
+body { margin: 0; }
+.container {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  width: 90%; 
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.toolbar-primary-700 {
+  background-color: #b8c3e3;
+  color: whitesmoke;
+}
+
+.text-primary-900 {
+  color: mat.get-color-from-palette($primary-palette, 900);
+}
+
+a {
+  color: mat.get-color-from-palette($primary-palette, 500);
+}

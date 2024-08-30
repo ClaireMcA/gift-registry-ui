@@ -1,54 +1,140 @@
 <app-toolbar></app-toolbar>
+<!-- <app-toolbar-graphic></app-toolbar-graphic> -->
 <mat-drawer-container class="example-container">
-    <mat-drawer [opened]="true" #drawer mode="side">
-        <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
-        <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
-    </mat-drawer>
-  
-    <div *ngIf="{ registryItemsMap: registryItemsMap$ | async, user: user$ | async, xAndY: xAndY$ | async } as state" class="container">
-        <div>
-            <h2>REGISTRY</h2>
+  <!-- <mat-drawer [opened]="true" #drawer mode="side">
+    <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
+    <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
+  </mat-drawer> -->
 
-            <p>
-                Thank you for celebrating our special day! It means the world to us that you can share this moment, this gift is priceless. However, we also know that some people enjoy giving gifts and would love to contribute to our new home.
-            </p>
-        
-            <p>
-                We have compiled a list of items if you would like some guidance in what we would find most useful. Some of these items also include a description or link for particular styles we like, but don't hold back to go rogue if you're feeling inspired! We can't wait to incorporate splashes of the personalities of our favourite people in our home.
-            </p>
-        
-            <p>
-                If you would prefer to contribute money, there will also be a letter box for cards and cash on the day. Your contributions will go towards 'big ticket items' such as furniture and white goods.
-            </p>
+  <div
+    *ngIf="{
+      registryItemsMap: registryItemsMap$ | async,
+      user: user$ | async,
+      xAndY: xAndY$ | async
+    } as state"
+    class="container"
+  >
+    <div class="intro">
+      <h2>Our Registry</h2>
 
-            <p>
-                Thanks again! <br>
-                Love Jaedin & Emily
-            </p>
-        </div>
-        
-        <div class="category-container" *ngFor="let keyval of state.registryItemsMap | keyvalue">
-            <h1>{{ keyval.key }}</h1>
-            <mat-card appearance="outlined" *ngFor="let item of keyval.value; let first = first;" [ngClass]="{ 'mt-1': !first }">
-                <mat-card-header>
-                    <a *ngIf="item.hyperlink" href="{{ item.hyperlink }}" target="_blank" mat-card-avatar mat-mini-fab color="primary"><fa-icon [icon]="faLink"></fa-icon></a>
-                    <mat-card-title>{{ item.title }}</mat-card-title>
-                    <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
-                </mat-card-header>
-    
-                <!-- <span class="ml-auto"> -->
-                    <mat-card-actions>
-        
-                        <button *ngIf="item.userRegistered !== state.user && item.userRegistered" class="too-slow" mat-stroked-button color="primary" disabled>Too slow</button> 
-                        <button *ngIf="item.userRegistered === state.user" (click)="deregister(item._id)" mat-stroked-button color="warn"><fa-icon [icon]="faTimes"></fa-icon></button> 
-                        <button *ngIf="item.userRegistered !== state.user && !item.userRegistered" (click)="register($event, item._id, state.user)" class="get-it" mat-stroked-button color="primary">I'll get it</button>     
-                        <span *ngIf="item.userRegistered === state.user" class="double-lined">You're getting this item</span>
-                    </mat-card-actions>
-                <!-- </span> -->
-            </mat-card>
-        </div>
-    
-        <fa-icon [ngClass]="{ 'animate-plus': animatePlus$ | async }" [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }" class="plus" [icon]="faCartPlus"></fa-icon>
+      <p>
+        Thank you for considering buying us a gift for our special day! Please don’t feel obliged to get us anything as your presence on the day means so much more to us. 
+      </p>
+
+      <p>
+        We understand some people love to give gifts and as a young couple starting our lives together, anything we do receive would be a huge blessing to us. We have assembled a registry of items that would be of most use to us. As we have both lived out of home for a number of years, we already have many essentials that are wearing out, so we have included these if you would prefer to get something you know we need. Alternatively, we have included a list of places we (Mikayla) love shopping at, to get gift cards from if a physical gift is too difficult. (There will be a wishing well on the day for cards to be placed in.)
+      </p>
+
+      <p>
+        We have included website links for the items we would like to make it easier to find things that would suit our current décor and to give some guidance. A number of these (especially those from House) go on sale regularly, so it can be worth keeping an eye on them. Most of these items can be ordered online if that’s more convenient as well.
+      </p>
+
+      <p>
+        Thanks again!<br />
+        Love Mikayla and Connor
+      </p>
     </div>
-</mat-drawer-container>
+    <div>
+    <div
+      class="category-container"
+      *ngFor="let keyval of state.registryItemsMap | keyvalue"
+    >
+      <h2 class="category-title"><strong>{{ keyval.key }}</strong></h2>
+      <mat-card
+        appearance="outlined"
+        *ngFor="let item of keyval.value; let first = first"
+      >
+        <mat-card-header>
+          <!-- <ng-template *ngIf="item.hyperlink"> -->
+            <a
+              *ngIf="item.hyperlink"
+              href="{{ item.hyperlink }}"
+              target="_blank"
+              class="title-link"
+            >
+              <mat-card-title class="mat-primary">{{ item.title }}</mat-card-title>
+            </a>
+          <!-- </ng-template> -->
+          <!-- <ng-template #noLink> -->
+            <mat-card-title 
+              *ngIf="!item.hyperlink"
+              class="mat-primary"
+            >
+            {{ item.title }}
+          </mat-card-title>
+          <!-- </ng-template> -->
 
+          <!-- <ng-template #elseBlock><mat-card-title class="mat-primary">False Heading</mat-card-title></ng-template> -->
+          <!-- <button
+            *ngIf="item.hyperlink"
+            (click)=item.hyperlink
+            mat-raised-button
+            mat-card-avatar
+            color="primary"
+          >
+          <fa-icon [icon]="faLink"></fa-icon>
+          </button> -->
+          <a
+            *ngIf="item.hyperlink"
+            href="{{ item.hyperlink }}"
+            target="_blank"
+            mat-mini-fab
+            mat-card-avatar
+            color="primary"
+            ><fa-icon [icon]="faLink"></fa-icon
+          ></a>
+          
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+        </mat-card-content>
+
+        <!-- <span class="ml-auto"> -->
+        <mat-card-actions>
+          <button
+            *ngIf="item.userRegistered !== state.user && item.userRegistered && item.userRegistered !== 'unlimited'"
+            class="too-slow"
+            mat-raised-button
+            color="primary"
+            disabled
+          >
+            Too slow
+          </button>
+
+          <span *ngIf="item.userRegistered === state.user && item.userRegistered !== 'unlimited'" class="double-lined">
+            You're getting this item
+          </span>
+          <button
+            *ngIf="item.userRegistered === state.user"
+            (click)="deregister(item._id)"
+            class="cancel-it"
+            mat-raised-button
+            color="warn"
+          >
+            Cancel
+            <!-- <fa-icon [icon]="faTimes"></fa-icon> -->
+          </button>
+
+          <button
+            *ngIf="item.userRegistered !== state.user && !item.userRegistered && item.userRegistered !== 'unlimited'"
+            (click)="register($event, item._id, state.user)"
+            class="get-it"
+            mat-raised-button
+            color="primary"
+          >
+            I'll get it
+          </button>
+        </mat-card-actions>
+        <!-- </span> -->
+      </mat-card>
+    </div>
+
+    <fa-icon
+      [ngClass]="{ 'animate-plus': animatePlus$ | async }"
+      [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }"
+      class="plus"
+      [icon]="faCartPlus"
+    ></fa-icon>
+  </div>
+</div>
+</mat-drawer-container>

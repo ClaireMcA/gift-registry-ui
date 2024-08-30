@@ -4,29 +4,29 @@ import { BehaviorSubject, merge, Observable, Subject } from 'rxjs';
 import { map, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { RegistryItem } from './registry-item';
+import { RegistryAdmin } from './registry-admin';
 
-interface RegistryItemMap {
-  [key: string]: RegistryItem[]
+interface RegistryAdminMap {
+  [key: string]: RegistryAdmin[]
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistryItemService {
+export class RegistryAdminService {
   private onDestroy$ = new Subject<void>();
   private requestRegisterForItem$ = new Subject<{ id: string, user: string }>();
   private requestDeregisterForItem$ = new Subject<string>();
 
-  public registryItemsSubject = new BehaviorSubject<RegistryItem[]>([]);
+  public registryAdminSubject = new BehaviorSubject<RegistryAdmin[]>([]);
 
-  public registryItems$ = this.registryItemsSubject.asObservable();
+  public registryAdmin$ = this.registryAdminSubject.asObservable();
 
-  public registryItemsMap$ = this.registryItemsSubject.pipe(
+  public registryAdminMap$ = this.registryAdminSubject.pipe(
     map(items => items.reduce((acc, item) => acc[item.category] ? { 
       ...acc, 
       [item.category]: [ ...acc[item.category], item]
-    } : { ...acc, [item.category]: [item] }, {} as RegistryItemMap)
+    } : { ...acc, [item.category]: [item] }, {} as RegistryAdminMap)
   ));
 
   private registerForItem$ = this.requestRegisterForItem$.pipe(
@@ -35,8 +35,8 @@ export class RegistryItemService {
         map(_ => ({ id, user }))
       )
     ),
-    tap(({ id, user }) => this.registryItemsSubject.next(
-      this.registryItemsSubject.getValue().map(item => item._id === id ? { ...item, userRegistered: user } : item)
+    tap(({ id, user }) => this.registryAdminSubject.next(
+      this.registryAdminSubject.getValue().map(item => item._id === id ? { ...item, userRegistered: user } : item)
     ))
   )
 
@@ -46,14 +46,14 @@ export class RegistryItemService {
         map(_ => id)
       )
     ),
-    tap(id => this.registryItemsSubject.next(
-      this.registryItemsSubject.getValue().map(item => item._id === id ? { ...item, userRegistered: null } : item)
+    tap(id => this.registryAdminSubject.next(
+      this.registryAdminSubject.getValue().map(item => item._id === id ? { ...item, userRegistered: null } : item)
     ))
   )
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.http.get<RegistryItem[]>(`${environment.apiUrl}/registry-items`).subscribe(result => {
-      this.registryItemsSubject.next(result.sort((a, b) => a.category.localeCompare(b.category)));
+    this.http.get<RegistryAdmin[]>(`${environment.apiUrl}/registry-items`).subscribe(result => {
+      this.registryAdminSubject.next(result.sort((a, b) => a.category.localeCompare(b.category)));
     });
 
     merge(
@@ -62,12 +62,12 @@ export class RegistryItemService {
     ).pipe(takeUntil(this.onDestroy$)).subscribe()
   }
 
-  public createItem(item: Omit<RegistryItem, '_id'>) {
+  public createItem(item: Omit<RegistryAdmin, '_id'>) {
     const token = this.authService.tokenSubject.getValue();
 
-    this.http.post<RegistryItem>(`${environment.apiUrl}/registry-items`, item, { headers: { Authorization: `Bearer ${token}`}}).subscribe(result => {
-      this.registryItemsSubject.next([
-        ...this.registryItemsSubject.getValue(), 
+    this.http.post<RegistryAdmin>(`${environment.apiUrl}/registry-items`, item, { headers: { Authorization: `Bearer ${token}`}}).subscribe(result => {
+      this.registryAdminSubject.next([
+        ...this.registryAdminSubject.getValue(), 
         result
       ].sort((a, b) => a.category.localeCompare(b.category)));
     });
@@ -76,9 +76,9 @@ export class RegistryItemService {
   public deleteItem(id: string) {
     const token = this.authService.tokenSubject.getValue();
 
-    this.http.delete<RegistryItem>(`${environment.apiUrl}/registry-items/${id}`, { headers: { Authorization: `Bearer ${token}`}}).subscribe(result => {
-      this.registryItemsSubject.next(
-        this.registryItemsSubject.getValue().filter(i => i._id !== id).sort((a, b) => a.category.localeCompare(b.category))
+    this.http.delete<RegistryAdmin>(`${environment.apiUrl}/registry-items/${id}`, { headers: { Authorization: `Bearer ${token}`}}).subscribe(result => {
+      this.registryAdminSubject.next(
+        this.registryAdminSubject.getValue().filter(i => i._id !== id).sort((a, b) => a.category.localeCompare(b.category))
       );
     });
   }

@@ -38,12 +38,12 @@ In the same row as the IP address that you want to promote to static, click Rese
 Provide a name for the new static IP address and click Reserve.
 
 Install docker https://docs.docker.com/engine/install/debian/
-git clone https://github.com/DanMakor/gift-registry-api.git
+git clone https://github.com/ClaireMcA/gift-registry-api.git
 navigate to the directory with the dockerfile and docker build . --tag gift-registry-api
 
 Install certbot - sudo apt install certbot
 Use the standalone manual challenge to get the certificates. Make sure you have mapped your domain name to the ip of the server you are running the command on
-sudo certbot certonly --standalone --preferred-challenges http -d www.garrard.net.au -d garrard.net.au
+sudo certbot certonly --standalone --preferred-challenges http -d www.mikaylaandconnor.com -d mikaylaandconnor.com
 
 To run mongodb so you can connect to it
 You need to add a TCP firewall rule for port 27017, you can use source ip of 0.0.0.0/0 or your computer ip
