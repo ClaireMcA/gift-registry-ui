@@ -10,20 +10,78 @@
     *ngIf="{
       registryAdminMap: registryAdminMap$ | async,
       user: user$ | async,
-      xAndY: xAndY$ | async
+      xAndY: xAndY$ | async,
+
     } as state"
     class="container"
   >
-    <div class="intro">
+    <div class="form-container">
       <h2>MANAGE REGISTRY</h2>
       <p>Add a new registry item:</p>
 
-      <!-- <form (ngSubmit)=''> -->
+      <!-- title: string
+      description?: string
+      userRegistered: string | null
+      hyperlink: string
+      category: string -->
 
-      <!-- </form> -->
+      <form class="form">
+        <mat-form-field>
+          <mat-label>Item Name</mat-label>
+          <input 
+            matInput
+            name="title"
+            [(ngModel)]="registryItem.title"
+          >
+          <mat-error>You must enter a name</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <mat-label>Item Description</mat-label>
+          <input 
+            matInput
+            name="description"
+            [(ngModel)]="registryItem.description"
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Item Link</mat-label>
+          <input 
+            matInput
+            name="hyperlink"
+            [(ngModel)]="registryItem.hyperlink"
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Item Category</mat-label>
+          <input 
+            matInput
+            name="category"
+            [(ngModel)]="registryItem.category"
+          >
+        </mat-form-field>
+
+        <ng-container>
+          <button type="submit" mat-raised-button color="primary">
+              Add Item
+              <!-- <fa-icon *ngIf="state.disableSave" [spin]="true" [icon]="faSpinner"></fa-icon> -->
+          </button>
+        </ng-container>
+
+      </form>
     </div>
 
-    <div>
+
+
+
+
+
+
+    
+    <div class="registry-container">
     <div
       class="category-container"
       *ngFor="let keyval of state.registryAdminMap | keyvalue"
@@ -34,7 +92,6 @@
         *ngFor="let item of keyval.value; let first = first"
       >
       <mat-card-header>
-        <!-- <ng-template *ngIf="item.hyperlink"> -->
           <a
             *ngIf="item.hyperlink"
             href="{{ item.hyperlink }}"
@@ -43,26 +100,14 @@
           >
             <mat-card-title class="mat-primary">{{ item.title }}</mat-card-title>
           </a>
-        <!-- </ng-template> -->
-        <!-- <ng-template #noLink> -->
+
           <mat-card-title 
             *ngIf="!item.hyperlink"
             class="mat-primary"
           >
           {{ item.title }}
         </mat-card-title>
-        <!-- </ng-template> -->
 
-        <!-- <ng-template #elseBlock><mat-card-title class="mat-primary">False Heading</mat-card-title></ng-template> -->
-        <!-- <button
-          *ngIf="item.hyperlink"
-          (click)=item.hyperlink
-          mat-raised-button
-          mat-card-avatar
-          color="primary"
-        >
-        <fa-icon [icon]="faLink"></fa-icon>
-        </button> -->
         <a
           *ngIf="item.hyperlink"
           href="{{ item.hyperlink }}"
@@ -80,50 +125,50 @@
 
       <!-- <span class="ml-auto"> -->
       <mat-card-actions>
-        <button
-          *ngIf="item.userRegistered !== state.user && item.userRegistered && item.userRegistered !== 'unlimited'"
-          class="too-slow"
-          mat-raised-button
-          color="primary"
-          disabled
+        <span
+          *ngIf="item.userRegistered"
         >
-          Too slow
-        </button>
-
-        <span *ngIf="item.userRegistered === state.user && item.userRegistered !== 'unlimited'" class="double-lined">
-          You're getting this item
+          Registered by: {{ item.userRegistered }}
+        </span>
+        <span
+          *ngIf="!item.userRegistered"
+        >
+          Still Available
         </span>
         <button
-          *ngIf="item.userRegistered === state.user"
-          (click)="deregister(item._id)"
-          class="cancel-it"
-          mat-raised-button
-          color="warn"
-        >
-          Cancel
-          <!-- <fa-icon [icon]="faTimes"></fa-icon> -->
-        </button>
-
-        <button
-          *ngIf="item.userRegistered !== state.user && !item.userRegistered && item.userRegistered !== 'unlimited'"
-          (click)="register($event, item._id, state.user)"
-          class="get-it"
+          class="edit"
           mat-raised-button
           color="primary"
         >
-          I'll get it
+          Edit
         </button>
       </mat-card-actions>
       <!-- </span> -->
     </mat-card>
   </div>
-
-  <fa-icon
-    [ngClass]="{ 'animate-plus': animatePlus$ | async }"
-    [ngStyle]="{ top: state.xAndY?.y + 'px', left: state.xAndY?.x + 'px' }"
-    class="plus"
-    [icon]="faCartPlus"
-  ></fa-icon>
-</div>
-</div>
+  </div>
+  </div>
 </mat-drawer-container>
+
+
+
+
+
+
+
+<!-- <mat-form-field>
+  <mat-label>Category</mat-label>
+
+    <input type="text"
+      placeholder="Select a Category"
+      aria-label="Category filter"
+      matInput
+      [ngModel]="registryItem.category"
+      name="category"
+    >
+      <mat-option *ngFor="let category of filteredCategories" [value]="category">
+            {{ category }}
+      </mat-option>
+
+  <mat-error>You must select a category</mat-error>
+</mat-form-field> -->

@@ -1,66 +1,126 @@
 <app-toolbar></app-toolbar>
 <!-- <app-toolbar-graphic></app-toolbar-graphic> -->
 
-<div class="container" *ngIf="{ disableSave: disableSave$ | async,  usersRsvp: usersRsvp$ | async } as state">
-    <h1>Wedding RSVP</h1>
-    <ng-container *ngIf="state.usersRsvp">
-        <h4>
-            Thanks {{ state.usersRsvp.names }}!
-            We have received your RSVP, thanks for letting us know. If anything changes please contact us directly at <a class="text-primary-900" href="mailto:mikaylaanconnor@gmail.com">mikaylaanconnor@gmail.com</a>.
-        </h4>
-    </ng-container>
-    <ng-container *ngIf="!state.usersRsvp">
-        <h4>We would be asbolutely thrilled to have you at our wedding, please just let us know a few details for the day</h4>
+<div
+  class="container"
+  *ngIf="{
+    disableSave: disableSave$ | async,
+    usersRsvp: usersRsvp$ | async
+  } as state"
+>
+  <h1>Wedding RSVP</h1>
+  <ng-container *ngIf="state.usersRsvp">
+    <h4>
+      Thanks {{ state.usersRsvp.names }}! We have received your RSVP, thanks for
+      letting us know. If anything changes please contact us directly at
+      <a class="text-primary-900" href="mailto:mikaylaanconnor@gmail.com">
+        mikaylaanconnor&#64;gmail.com
+      </a>
+      .
+    </h4>
+  </ng-container>
+  <ng-container *ngIf="!state.usersRsvp">
+    <h4>
+      We would be asbolutely thrilled to have you at our wedding, please just
+      let us know a few details for the day
+    </h4>
 
-        <form (ngSubmit)='submitSubject$.next()'>
-            <mat-form-field appearance="fill">
-                <mat-label>Family</mat-label>
-                <input type="text"
-                       placeholder="Filter a family"
-                       aria-label="Family filter"
-                       matInput
-                       [ngModel]="rsvp.names"
-                       (ngModelChange)="filterFamilies($event)"
-                       name="names"
-                       [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let family of filteredFamilies" [value]="family">
-                        {{ family }}
-                  </mat-option>
-                </mat-autocomplete>
-                <mat-error>You must select a related family</mat-error>
-            </mat-form-field>
-    
-            <label>Who can attend our wedding?</label>
-            <mat-button-toggle-group [(ngModel)]="rsvp.canAttend" name="canAttend" aria-label="Can you attend">
-                <mat-button-toggle value="Everyone">Everyone</mat-button-toggle>
-                <mat-button-toggle value="Some">Some of us</mat-button-toggle>
-                <mat-button-toggle value="None">None of us</mat-button-toggle>
-            </mat-button-toggle-group>
+    <form
+      id="formRSVP"
+      [formGroup]="rsvpForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field subscriptSizing="dynamic" appearance="fill">
+        <mat-label>Family</mat-label>
+        <input
+          type="text"
+          [formControl]="rsvpForm.controls.name"
+          placeholder="Filter a family"
+          aria-label="Family filter"
+          matInput
+          [ngModel]="rsvp.names"
+          (ngModelChange)="filterFamilies($event)"
+          name="names"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let family of filteredFamilies" [value]="family">
+            {{ family }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-error *ngIf="rsvpForm.controls.name.invalid && submitted">
+        You must select a related family
+      </mat-error>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Attendance Details</mat-label>
-                <textarea [(ngModel)]="rsvp.comments" name="comments" matInput placeholder="Do you have any comments?"></textarea>
-            </mat-form-field>
-    
-            <label class="dietary-requirements-label">Do you have any dietary requirements?</label>
-            <mat-button-toggle-group [(ngModel)]="rsvp.dietaryRequirements" name="dietaryRequirements" aria-label="Dietary Requirements">
-                <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-                <mat-button-toggle [value]="false">No</mat-button-toggle>
-            </mat-button-toggle-group>
-        
-            <mat-form-field appearance="outline" *ngIf="rsvp.dietaryRequirements">
-              <mat-label>Dietary Details</mat-label>
-              <textarea [(ngModel)]="rsvp.dietaryDetails" name="dietaryDetails" matInput placeholder="Enter dietary details"></textarea>
-            </mat-form-field>
-        
-            <ng-container>
-                <button [disabled]="state.disableSave" type="submit" mat-raised-button color="primary">
-                    Submit
-                    <fa-icon *ngIf="state.disableSave" [spin]="true" [icon]="faEnvelope"></fa-icon>
-                </button>
-            </ng-container>
-          </form>
-    </ng-container>
-    
+      <label class="formLabel">Who can attend our wedding?</label>
+      <mat-button-toggle-group
+        [(ngModel)]="rsvp.canAttend"
+        name="canAttend"
+        [formControl]="rsvpForm.controls.canAttend"
+        aria-label="Can you attend"
+      >
+        <mat-button-toggle value="Everyone">Everyone</mat-button-toggle>
+        <mat-button-toggle value="Some">Some of us</mat-button-toggle>
+        <mat-button-toggle value="None">None of us</mat-button-toggle>
+      </mat-button-toggle-group>
+      <mat-error *ngIf="rsvpForm.controls.canAttend.invalid && submitted">
+        You must select who is attending
+      </mat-error>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Attendance Details</mat-label>
+        <textarea
+          [(ngModel)]="rsvp.comments"
+          name="comments"
+          [formControl]="rsvpForm.controls.comments"
+          matInput
+          placeholder="Do you have any comments?"
+        ></textarea>
+      </mat-form-field>
+
+      <label class="formLabel dietary-requirements-label">
+        Do you have any dietary requirements?
+      </label>
+      <mat-button-toggle-group
+        [(ngModel)]="rsvp.dietaryRequirements"
+        name="dietaryRequirements"
+        [formControl]="rsvpForm.controls.dietaryRequirements"
+        aria-label="Dietary Requirements"
+      >
+        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+        <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+      <mat-error *ngIf="rsvpForm.controls.dietaryRequirements.invalid && submitted">
+        You must select if you have dietary requirements
+      </mat-error>
+
+      <mat-form-field appearance="outline" *ngIf="rsvp.dietaryRequirements">
+        <mat-label>Dietary Details</mat-label>
+        <textarea
+          [(ngModel)]="rsvp.dietaryDetails"
+          name="dietaryDetails"
+          [formControl]="rsvpForm.controls.dietaryDetails"
+          matInput
+          placeholder="Enter dietary details"
+        ></textarea>
+      </mat-form-field>
+
+      <ng-container>
+        <button
+          [disabled]="state.disableSave"
+          type="submit"
+          mat-raised-button
+          color="primary"
+        >
+          Submit
+          <fa-icon
+            *ngIf="state.disableSave"
+            [spin]="true"
+            [icon]="faSpinner"
+          ></fa-icon>
+        </button>
+      </ng-container>
+    </form>
+  </ng-container>
 </div>

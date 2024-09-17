@@ -11,6 +11,31 @@ mat-card-actions {
     justify-content: space-between;
 } 
 
+.form-container {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+.form-container p, .form-container h2 {
+    text-align: left;
+}
+
+form {
+    align-self: center;
+    width: 600px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-top: 1rem;
+}
+
 mat-drawer-container {
     min-height: 100vh;
 }
@@ -143,7 +168,7 @@ span {
     animation: move 1s ease-in;
 }
 
-button.get-it,button.too-slow,button.cancel-it {
+button.get-it,button.too-slow,button.cancel-it,button.edit {
     min-width: 120px;
 }
 

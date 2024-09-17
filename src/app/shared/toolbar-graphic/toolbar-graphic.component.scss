@@ -1,10 +1,10 @@
 mat-toolbar {
-    background-image: url('/assets/banner.png');
+    background-image: url('/assets/banner.svg');
     height: min-content;
     background-position: top;
-    background-repeat: repeat-x;
-    background-size: cover;
-    
+    background-repeat: none;
+    // background-size: cover;
+    height: 150px;
 
 }
 

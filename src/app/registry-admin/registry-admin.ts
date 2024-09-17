@@ -1,4 +1,4 @@
-export interface RegistryAdmin {
+export interface RegistryItem {
     _id: string
     title: string
     description?: string

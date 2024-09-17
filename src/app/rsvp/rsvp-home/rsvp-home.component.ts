@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { faEnvelope, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faUserSecret, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { merge, Observable, of, Subject } from 'rxjs';
 import { catchError, exhaustMap, filter, map, mapTo, share, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Rsvp } from '../rsvp';
 import { RsvpService } from '../rsvp.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-rsvp-home',
@@ -14,6 +15,7 @@ import { RsvpService } from '../rsvp.service';
 export class RsvpHomeComponent implements OnInit {
   public readonly faEnvelope = faEnvelope;
   public readonly faUserSecret = faUserSecret;
+  public readonly faSpinner = faSpinner;
   private families = [
     "Glenn and Jacqui Thomas",
     "Alison Sullivan",
@@ -58,6 +60,7 @@ export class RsvpHomeComponent implements OnInit {
     "Jakob Sutton",
     "Nelson Griffiths",
   ]
+  public submitted = false;
   
   private onDestroy$ = new Subject();
 
@@ -75,6 +78,25 @@ export class RsvpHomeComponent implements OnInit {
     dietaryDetails: '',
     comments: ''
   }
+
+  rsvpForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    canAttend: new FormControl(null, {
+      validators: Validators.required
+    }),
+    comments: new FormControl(''),
+    dietaryRequirements: new FormControl(null, {
+      validators: Validators.required
+    }), 
+    dietaryDetails: new FormControl(''),
+  });
+
+  // registerForm = new FormGroup({
+  //   name: new FormControl(''),
+  //   attendance: new FormControl(''),
+  //   password: new FormControl(''),
+  //   confirmPassword: new FormControl('')
+  // });
 
   public filteredFamilies = this.families.slice();
   public filterFamilies(selectedNames: string) {
@@ -94,6 +116,20 @@ export class RsvpHomeComponent implements OnInit {
     )),
     share()
   );
+
+
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.rsvpForm.invalid) {
+      console.log(JSON.stringify(this.rsvpForm.value, null, 2));
+      return; 
+    } else {
+      this.submitSubject$.next();
+    }
+
+    console.log(JSON.stringify(this.rsvpForm.value, null, 2));
+  }
 
   public disableSave$ = merge(
     this.submitBegin$.pipe(mapTo(true)),

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { map, mapTo, switchMap, switchMapTo, take } from 'rxjs/operators';
 import { RegistryAdminService } from './registry-admin.service';
-import { faCartPlus, faLink, faPlus, faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faLink, faSpinner, faShoppingCart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { combineLatest, from, interval, merge, Observable, Subject } from 'rxjs';
+import { RegistryItem } from './registry-admin';
 
 @Component({
   selector: 'app-registry-admin',
@@ -15,6 +16,14 @@ export class RegistryAdminComponent implements OnInit {
   public faTimes = faTimes;
   public faCartPlus = faCartPlus;
   public faShoppingCart = faShoppingCart;
+  public faSpinner = faSpinner;
+  public registryItem: Partial<RegistryItem> = { 
+    title: '',
+    description: '',
+    userRegistered: null,
+    hyperlink: '',
+    category: '',
+  }
   public xAndY$ = new Subject<{ x: number, y: number}>();
   public animatePlusSubject$ = new Subject<boolean>();
   public animatePlus$ = merge(
