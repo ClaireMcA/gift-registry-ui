@@ -10,12 +10,20 @@
         class="menu-img"
         src="/assets/Menu.svg" 
         alt="Menu Button"
+        *ngIf="state.isAuthenticated"
       />
       <img 
         class="logo-img"
         src="/assets/Logo.svg" 
         alt="Mikayla and Connor"
+
       />
+      <img 
+      class="menu-img"
+      src="/assets/Logo.svg" 
+      alt="Mikayla and Connor"
+      *ngIf="!state.isAuthenticated"
+    />
   </a>
     <!-- <button color="accent" routerLink="/home" mat-button>Home</button> -->
     <button
