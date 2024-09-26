@@ -1,5 +1,5 @@
 <app-toolbar></app-toolbar>
-<!-- <app-toolbar-graphic></app-toolbar-graphic> -->
+<app-toolbar-graphic></app-toolbar-graphic>
 
 <div
   class="container"
@@ -8,13 +8,13 @@
     usersRsvp: usersRsvp$ | async
   } as state"
 >
-  <h1>Wedding RSVP</h1>
+  <h1 class="mat-headline-4">Wedding Rsvp</h1>
   <ng-container *ngIf="state.usersRsvp">
     <h4>
       Thanks {{ state.usersRsvp.names }}! We have received your RSVP, thanks for
       letting us know. If anything changes please contact us directly at
-      <a class="text-primary-900" href="mailto:mikaylaanconnor@gmail.com">
-        mikaylaanconnor&#64;gmail.com
+      <a class="text-primary-900" href="mailto:mikaylaandconnor@gmail.com">
+        mikaylaandconnor&#64;gmail.com
       </a>
       .
     </h4>

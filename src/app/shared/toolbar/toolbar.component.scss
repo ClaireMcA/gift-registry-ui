@@ -19,7 +19,8 @@ div {
 }
 
 a {
-    color: var(--accent-color);
+    // color: var(--accent-color);
+    text-decoration: none;
 }
 
 button:not(:first-child) {
@@ -27,7 +28,7 @@ button:not(:first-child) {
 }
 
 span {
-  color: var(--accent-color);
+  // color: var(--accent-color);
   font-size: large;
 }
 
@@ -35,13 +36,13 @@ img {
     height: 3.3rem;
 }
 
-  .md-hidden {
-    display: flex;
-  }
+.md-hidden {
+  display: flex;
+}
 
-  .md-shown, .md-shown-flex {
-    display: none;
-  }
+.md-shown, .md-shown-flex {
+  display: none;
+}
 
   @media(min-width: 666px) {
     .md-hidden {
@@ -58,6 +59,11 @@ img {
     
     .logo-img {
       display: block;
+      // font-size: 24px;
+      // margin: 0;
+      // color: var(--accent-color);
+      // align-self: center;
     }
+
 
   }

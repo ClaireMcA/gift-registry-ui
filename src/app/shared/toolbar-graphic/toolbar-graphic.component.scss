@@ -1,11 +1,20 @@
 mat-toolbar {
-    background-image: url('/assets/banner.svg');
+    background: url('/assets/banner.png');
     height: min-content;
     background-position: top;
-    background-repeat: none;
+    background-repeat: no-repeat;
     // background-size: cover;
     height: 150px;
+    // background-color: white;
+    // background: transparent;
+    background-size: contain;
 
+}
+
+@media (min-width: 666px) {
+    mat-toolbar {
+        background-image: url('/assets/banner-long.png');
+    }
 }
 
 @media (min-width: 1024px) {

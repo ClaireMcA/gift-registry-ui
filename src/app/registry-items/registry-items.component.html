@@ -1,21 +1,15 @@
 <app-toolbar></app-toolbar>
-<!-- <app-toolbar-graphic></app-toolbar-graphic> -->
-<mat-drawer-container class="example-container">
+<app-toolbar-graphic></app-toolbar-graphic>
   <!-- <mat-drawer [opened]="true" #drawer mode="side">
     <fa-icon [icon]="faShoppingCart"></fa-icon><span>Your Items</span>
     <p *ngFor="let item of myRegistryItems$ | async">{{ item.title }}</p>
   </mat-drawer> -->
 
-  <div
-    *ngIf="{
-      registryItemsMap: registryItemsMap$ | async,
-      user: user$ | async,
-      xAndY: xAndY$ | async
-    } as state"
-    class="container"
-  >
-    <div class="intro">
-      <h2>Our Registry</h2>
+  <!-- <div
+    class="info-container"
+  > -->
+    <div class="intro container">
+      <h1 class="mat-headline-4">Our Registry</h1>
 
       <p>
         Thank you for considering buying us a gift for our special day! Please don’t feel obliged to get us anything as your presence on the day means so much more to us. 
@@ -34,7 +28,15 @@
         Love Mikayla and Connor
       </p>
     </div>
-    <div>
+    <mat-drawer-container>
+    <div
+      *ngIf="{
+        registryItemsMap: registryItemsMap$ | async,
+        user: user$ | async,
+        xAndY: xAndY$ | async
+      } as state"
+      class="items container"
+    >
     <div
       class="category-container"
       *ngFor="let keyval of state.registryItemsMap | keyvalue"
@@ -136,5 +138,5 @@
       [icon]="faCartPlus"
     ></fa-icon>
   </div>
-</div>
+<!-- </div> -->
 </mat-drawer-container>
