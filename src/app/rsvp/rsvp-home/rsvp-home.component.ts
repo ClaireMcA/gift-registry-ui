@@ -25,7 +25,6 @@ export class RsvpHomeComponent implements OnInit {
     "Brooke Thomas",
     "Blake Barrett and Abbey Stone",
     "Brayden Sullivan and Ashleigh Wilson",
-    "Ash Barnes",
     "Ann and Grant Hall",
     "Steve, Amber and Riley Hall",
     "Maddy and Brodie Duell",
@@ -59,6 +58,8 @@ export class RsvpHomeComponent implements OnInit {
     "Belinda Ewen",
     "Jakob Sutton",
     "Nelson Griffiths",
+    "Sunique and Jason Bosman",
+    "Rob Harkness",
   ]
   public submitted = false;
   
