@@ -60,7 +60,7 @@ navigate to the directory with the dockerfile and $ sudo docker build . --tag gi
 Follow these instructions to install certbot with pip. https://certbot.eff.org/instructions?ws=other&os=pip
 -------- sudo apt install certbot
 Use the standalone manual challenge to get the certificates. Make sure you have mapped your domain name to the ip of the server you are running the command on
-$ sudo certbot certonly --standalone --preferred-challenges http -d mikaylaandconnor.com
+$ sudo certbot certonly --standalone --preferred-challenges http -d registry.clairelouisebutler.com
 
 To run mongodb so you can connect to it
 You need to add a TCP firewall rule for port 27017, you can use source ip of 0.0.0.0/0 or your computer ip
